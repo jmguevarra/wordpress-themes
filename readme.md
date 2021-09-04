@@ -7,3 +7,4 @@
 5. Add gulp sass to compile gulp styles/scripts [here:](https://www.npmjs.com/package/gulp-sass)
 6. Add clean gulp css [here:](https://www.npmjs.com/package/gulp-clean-css)
 7. Add gulp if to add certain condition in pipe
+8. Install gulp sourcemaps at [here](https://www.npmjs.com/package/gulp-sourcemaps). It shows the exact css/js file of a code instead of the bundled file.
