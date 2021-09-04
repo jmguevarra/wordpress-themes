@@ -1,0 +1,26 @@
+{
+  "name": "jmsite",
+  "version": "1.0.0",
+  "description": "simple theme",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jmguevarra/wordpress-themes.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jmguevarra/wordpress-themes/issues"
+  },
+  "homepage": "https://github.com/jmguevarra/wordpress-themes#readme",
+  "devDependencies": {
+    "@babel/core": "^7.15.5",
+    "@babel/preset-env": "^7.15.4",
+    "@babel/register": "^7.15.3",
+    "gulp": "^4.0.2"
+  },
+  "dependencies": {}
+}

@@ -18,18 +18,18 @@ get_header();
         <div>
             Posted on 
             <a href="<?php the_permalink(); ?>">
-                <time datetime="<?= get_the_date('c'); ?>"><?php the_date(); ?></time>
+                <time datetime="<?= esc_attr(get_the_date('c')); ?>"><?php esc_attr(the_date()); ?></time>
             </a>
             By:
-            <a href="<?= get_author_posts_url( get_the_author_meta( 'ID' ) ); ?>">
-                <?= get_the_author(); ?>
+            <a href="<?= esc_url(get_author_posts_url( get_the_author_meta( 'ID' ) )); ?>">
+                <?= esc_html(get_the_author()); ?>
             </a>
         </div>
         <div><?php the_excerpt(); ?></div>
         <a href="<?php the_permalink(); ?>">Read More</a>
     <?php endwhile; ?>
 <?php else: ?>
-        <p>Sorry, no post matched your criteria.</p>
+        <p> <?= __('Sorry, no post matched your criteria.', 'jm-site'); ?> </p>
 <?php endif; ?>
 
 
