@@ -8,3 +8,5 @@
 6. Add clean gulp css [here:](https://www.npmjs.com/package/gulp-clean-css)
 7. Add gulp if to add certain condition in pipe
 8. Install gulp sourcemaps at [here](https://www.npmjs.com/package/gulp-sourcemaps). It shows the exact css/js file of a code instead of the bundled file.
+9. Optimized images with gulp imagemin [here](https://www.npmjs.com/package/gulp-imagemin)
+10. Install del npm package [here](https://www.npmjs.com/package/del)
