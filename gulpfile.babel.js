@@ -6,6 +6,8 @@ import gulpif from 'gulp-if';
 import sourcemaps from 'gulp-sourcemaps';
 import imagemin from 'gulp-imagemin';
 import del from 'del';
+import webpack from 'webpack-stream';
+import named from 'vinyl-named';
 
 
 const PRODUCTION = yargs.argv.prod;
@@ -19,6 +21,10 @@ const paths = {
    images: {
       src: 'src/assets/images/**/*.{jpg,jpeg,png,svg,gif}',
       dest: 'dist/assets/images'
+   },
+   scripts: {
+      src: ['src/assets/js/bundle.js', 'src/assets/js/admin.js'], 
+      dest:'dist/assets/js'
    },
    other:{
       //@1stArgs - copy all file from subfolders of assets and its subdirectories
@@ -55,6 +61,7 @@ export const watch = () =>{ //watch is to load the file dynamically
     * @2ndArg - task name
     */
    gulp.watch('src/assets/scss/**/*.scss', styles);
+   gulp.watch('src/assets/js/**/*.js', scripts);
    gulp.watch(paths.images.src, images);
    gulp.watch(paths.other.src, copy);
 }
@@ -64,8 +71,34 @@ export const copy = () =>{ //copy other file in asset folder to destination fold
          .pipe( gulp.dest(paths.other.dest) );
 }
 
+export const scripts = () => {
+   return gulp.src( paths.scripts.src )
+         .pipe(named())
+         .pipe( webpack({
+            mode: !PRODUCTION ? 'development' : 'production',  //minified if production
+            module:{
+               rules:[{                        //every single object is a rule here
+                   test: /\.js$/,              //all js file
+                   use: {
+                       loader: 'babel-loader', //use babel loader
+                       options: {
+                           presets: ["@babel/preset-env"]       
+                       }
+                   }
+               }]
+           },
+           output: {
+              filename: '[name].js' //changing file output to bundle from main.js
+           },
+           devtool: !PRODUCTION ? 'inline-source-map' : false //using the filename of a code instead of the bundle one
+         }) )
+         .pipe( gulp.dest(paths.scripts.dest) )
+}
+
+
+
 //run series of task, run parrallel
-export const dev = gulp.series( clean, gulp.parallel(styles, images, copy),  watch); //use for developing
-export const build = gulp.series( clean, gulp.parallel(styles, images, copy) ); //build when finish in development
+export const dev = gulp.series( clean, gulp.parallel(styles, scripts, images, copy),  watch); //use for developing
+export const build = gulp.series( clean, gulp.parallel(styles, scripts, images, copy) ); //build when finish in development
 
 export default dev; //default task

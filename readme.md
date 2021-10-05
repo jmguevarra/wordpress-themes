@@ -10,3 +10,4 @@
 8. Install gulp sourcemaps at [here](https://www.npmjs.com/package/gulp-sourcemaps). It shows the exact css/js file of a code instead of the bundled file.
 9. Optimized images with gulp imagemin [here](https://www.npmjs.com/package/gulp-imagemin)
 10. Install del npm package [here](https://www.npmjs.com/package/del)
+11. Install Webpack Stream [here](https://www.npmjs.com/package/webpack-stream)
