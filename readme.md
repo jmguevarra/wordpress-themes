@@ -24,5 +24,8 @@ for Scripts Libraries. Check first if the library is already in wordpress core a
 
 
 ## Bundling for Production
-This is packaging all necessary files in one zip file to install in wordpress.
+This is packaging all necessary files in one zip file to install in wordpress. Check compress task in gulpfile js in this  [commit](https://github.com/jmguevarra/wordpress-themes/commit/8eaabfeeb63c0a918e60b4397f1167a9ffd4b08c)
+
+## Replacing Placeholder
+For new theme name just replace jmsite with the new theme name. I added the task in gulpfilebabel.js on this [commit](https://github.com/jmguevarra/wordpress-themes/commit/f91fabeac5bde5e6896301429e46c9fa321f9a25)
 
