@@ -22,3 +22,7 @@ for Scripts Libraries. Check first if the library is already in wordpress core a
     wp_enqueue_script('jquery'); //adding jquery libary
 ```
 
+
+## Bundling for Production
+This is packaging all necessary files in one zip file to install in wordpress.
+
