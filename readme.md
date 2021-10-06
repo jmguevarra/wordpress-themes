@@ -11,3 +11,14 @@
 9. Optimized images with gulp imagemin [here](https://www.npmjs.com/package/gulp-imagemin)
 10. Install del npm package [here](https://www.npmjs.com/package/del)
 11. Install Webpack Stream [here](https://www.npmjs.com/package/webpack-stream)
+12. Adding BrowserSync install it with this document [here](https://browsersync.io/).
+
+
+
+
+## Notes
+for Scripts Libraries. Check first if the library is already in wordpress core and you can use it instead of adding new one using there own handle. [here](https://developer.wordpress.org/reference/functions/wp_enqueue_script/)
+```php
+    wp_enqueue_script('jquery'); //adding jquery libary
+```
+

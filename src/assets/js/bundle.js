@@ -1,7 +1,7 @@
 import './components/slider';
 
 const hello = () =>{
-    console.log('Hi you you');
+    console.log('Hi BrowserSync');
 }
 
 hello();

@@ -8,9 +8,11 @@ import imagemin from 'gulp-imagemin';
 import del from 'del';
 import webpack from 'webpack-stream';
 import named from 'vinyl-named';
+import browserSync from 'browser-sync';
 
 
 const PRODUCTION = yargs.argv.prod;
+const server = browserSync.create();
 
 
 const paths = {
@@ -35,6 +37,18 @@ const paths = {
    }
 }
 
+export const serve = (done) => {
+   server.init({
+      proxy: "http://localhost/jmsite/"
+   });
+   done();
+}
+
+export const reload = (done) =>{
+   server.reload()
+   done();
+}
+
 export const clean = () => del(['dist']); //clean dist folder
 
 export const styles = () => {
@@ -43,7 +57,8 @@ export const styles = () => {
          .pipe( sass().on('error', sass.logError) ) //checking error with sass
          .pipe( gulpif(PRODUCTION, cleanCss({compatibility: 'ie8'})) ) //if PRODUCTION is true then minified it
          .pipe( gulpif(!PRODUCTION, sourcemaps.write()) ) //giving permission to source maps to write in the above file and load the actual source file if not production
-         .pipe( gulp.dest(paths.styles.dest) ); //brings the optimized codes to distribution folder
+         .pipe( gulp.dest(paths.styles.dest) ) //brings the optimized codes to distribution folder
+         .pipe(server.stream()); //browsersync
 }
 
 export const images = () =>{
@@ -61,9 +76,10 @@ export const watch = () =>{ //watch is to load the file dynamically
     * @2ndArg - task name
     */
    gulp.watch('src/assets/scss/**/*.scss', styles);
-   gulp.watch('src/assets/js/**/*.js', scripts);
-   gulp.watch(paths.images.src, images);
-   gulp.watch(paths.other.src, copy);
+   gulp.watch('src/assets/js/**/*.js', gulp.series(scripts, reload));
+   gulp.watch('**/*.php', reload);
+   gulp.watch(paths.images.src, gulp.series(images, reload));
+   gulp.watch(paths.other.src, gulp.series(copy, reload));
 }
 
 export const copy = () =>{ //copy other file in asset folder to destination folder
@@ -98,7 +114,7 @@ export const scripts = () => {
 
 
 //run series of task, run parrallel
-export const dev = gulp.series( clean, gulp.parallel(styles, scripts, images, copy),  watch); //use for developing
+export const dev = gulp.series( clean, gulp.parallel(styles, scripts, images, copy), serve, watch); //use for developing
 export const build = gulp.series( clean, gulp.parallel(styles, scripts, images, copy) ); //build when finish in development
 
 export default dev; //default task

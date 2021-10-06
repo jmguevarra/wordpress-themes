@@ -1,6 +1,15 @@
+var JMObj = {}; //it handles all the function to organize it
+var d = document;
+var $ = jQuery;
 
-let  test = 1252;
-console.log('slider test');
-console.log('new');
+//onload
+jQuery(d).ready(function () {
+    /**Write your objects here */
+    JMObj.init();
 
-console.log(test);
+    //JMObj.exemple_function(); // call to a function, see below
+});
+
+JMObj.init = function(){
+    console.log('jquery is presented');
+};
