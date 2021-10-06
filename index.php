@@ -29,7 +29,7 @@ get_header();
         <a href="<?php the_permalink(); ?>">Read More</a>
     <?php endwhile; ?>
 <?php else: ?>
-        <p> <?= __('Sorry, no post matched your criteria.', 'jm-site'); ?> </p>
+        <p> <?= __('Sorry, no post matched your criteria.', 'jmsite'); ?> </p>
 <?php endif; ?>
 
 

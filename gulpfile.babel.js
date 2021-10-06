@@ -10,6 +10,8 @@ import webpack from 'webpack-stream';
 import named from 'vinyl-named';
 import browserSync from 'browser-sync';
 import zip from 'gulp-zip';
+import replace from 'gulp-replace';
+import info from './package.json';
 
 
 const PRODUCTION = yargs.argv.prod;
@@ -119,9 +121,12 @@ export const scripts = () => {
 
 export const compress = () =>{ //compressing all necessary files for user of the theme
    return gulp.src(paths.package.src)
-         .pipe(zip('jm-site.zip')) //@param  - is name of the file to zip
+         .pipe(replace('jmsite', info.name))
+         .pipe(zip(`${info.name}.zip`)) //@param  - is name of the file to zip
          .pipe(gulp.dest(paths.package.dest));
 }
+
+
 
 
 //run series of task, run parrallel
